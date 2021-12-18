@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Battleships.Services;
 
 namespace Battleships.Controllers
 {
@@ -20,7 +21,9 @@ namespace Battleships.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            BattleshipGameManager man = new BattleshipGameManager();
+
+            return View(man);
         }
 
         public IActionResult Privacy()
