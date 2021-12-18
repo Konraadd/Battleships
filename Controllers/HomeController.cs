@@ -22,7 +22,14 @@ namespace Battleships.Controllers
         public IActionResult Index()
         {
             BattleshipGameManager man = new BattleshipGameManager();
-
+            man.nextRound();
+            man.nextRound();
+            man.nextRound();
+            man.nextRound();
+            man.nextRound();
+            man.nextRound();
+            man.nextRound();
+            man.nextRound();
             return View(man);
         }
 

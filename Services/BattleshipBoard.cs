@@ -15,19 +15,9 @@ namespace Battleships.Services
         public BattleshipBoard()
         {
             occupiedFields = new List<Coordinates>();
-        }
-
-        public void PlaceBattleships()
-        {
             battleships = new List<Battleship>();
-            placeBattleship(5);
-            placeBattleship(4);
-            placeBattleship(3);
-            placeBattleship(2);
-            placeBattleship(2);
         }
-
-        private void placeBattleship(int size)
+        public void PlaceBattleship(int size)
         {
             Random random = new Random();
 

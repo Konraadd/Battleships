@@ -7,11 +7,36 @@ namespace Battleships.Services
 {
     public class BattleshipBot
     {
-        Dictionary<char, int> fields;
+        public BattleshipBoard battleshipBoard;
+        public BattleshipBoard enemyBattleshipBoard;
+        public ShootingBoard shootingBoard;
 
-        public BattleshipBot(Dictionary<char, int> fields)
+        public BattleshipBot()
         {
-            this.fields = fields;
+            battleshipBoard = new BattleshipBoard();
+            battleshipBoard.PlaceBattleship(5);
+            battleshipBoard.PlaceBattleship(4);
+            battleshipBoard.PlaceBattleship(3);
+            battleshipBoard.PlaceBattleship(2);
+            battleshipBoard.PlaceBattleship(2);
+            shootingBoard = new ShootingBoard();
+        }
+
+        public void addEnemyBoard(BattleshipBoard enemyBoard)
+        {
+            enemyBattleshipBoard = enemyBoard;
+        }
+        public void doRound()
+        {
+            shootingBoard.Shoot(enemyBattleshipBoard);
+        }
+
+        public bool checkWon()
+        {
+            if (shootingBoard.hits.Count == enemyBattleshipBoard.occupiedFields.Count)
+                return true;
+            else
+                return false;
         }
     }
 }

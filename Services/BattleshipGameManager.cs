@@ -7,25 +7,33 @@ namespace Battleships.Services
 {
     public class BattleshipGameManager
     {
-        public BattleshipBot Bot1;
-        public BattleshipBot Bot2;
-        public BattleshipBoard Board1;
-        public BattleshipBoard Board2;
+        public BattleshipBot bot1;
+        public BattleshipBot bot2;
 
         public int gameRound;
+        private bool gameFinished = false;
 
         public BattleshipGameManager()
         {
-            Board1 = new BattleshipBoard();
-            Board1.PlaceBattleships();
-            Board2 = new BattleshipBoard();
-            Board2.PlaceBattleships();
+            bot1 = new BattleshipBot();
+            bot2 = new BattleshipBot();
+            bot1.addEnemyBoard(bot2.battleshipBoard);
+            bot2.addEnemyBoard(bot1.battleshipBoard);
+        }
 
-
-
-            //Bot1 = new BattleshipBot();
-            //Board1 = new BattleshipBoard();
-            //Board2 = new BattleshipBoard();
+        public void nextRound()
+        {
+            // if game isn't finished, proceed with making rounds
+            if (!gameFinished)
+            {
+                bot1.doRound();
+                bot2.doRound();
+            }
+            // check end of game conditions
+            if (bot1.checkWon() || bot2.checkWon())
+            {
+                gameFinished = true;
+            }
         }
     }
 }

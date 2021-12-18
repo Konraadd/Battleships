@@ -29,10 +29,20 @@
     }
 
     .battleship-field {
+        background: #2653d0
+    }
+
+    .board-hit {
+        background: #00ff21
+    }
+
+    .board-miss {
         background: #ff0000
     }
 
-
+    .vertical-line {
+        border-left: 6px solid black;
+    }
 
 
    
@@ -40,7 +50,7 @@
 
 <div style="display:flex; margin-left:auto; margin-right:auto">
     <div style="display:flex; flex-direction:column; padding:4em">
-        <p style="text-align:center">BOT 1</p>
+        <h3 style="text-align:center">BOT 1</h3>
         <p style="text-align:center"> SHIPS BOARD</p>
         <table class="battleship-board">
             @{List<char> characters = new List<char>() { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
@@ -58,7 +68,7 @@
                         <th>@(i + 1)</th>
                         @for (int j = 0; j < 10; j++)
                         {
-                            if (Model.Board1.occupiedFields.Contains(new Battleships.Services.Coordinates(i, j)))
+                            if (Model.bot1.battleshipBoard.occupiedFields.Contains(new Battleships.Services.Coordinates(i, j)))
                             {
                                 <td class="battleship-field"></td>
                             }
@@ -83,19 +93,20 @@
                 </tr>
                 @for (int i = 0; i < 10; i++)
                 {
-                    <tr>
-                        <th>@(i + 1)</th>
-                        @for (int j = 0; j < 10; j++)
-                        {
-                            <td class="field"></td>
-                        }
-                    </tr>
+            <tr>
+                <th>@(i + 1)</th>
+                @for (int j = 0; j < 10; j++)
+                {
+                    <td id= ="@String.Format("{0}{1}", i,j)"></td>
+                }
+            </tr>
                 }
             </tbody>
         </table>
     </div>
+    <div class="vertical-line"></div>
     <div style="display:flex; flex-direction:column; padding:4em">
-        <p style="text-align:center">BOT 2</p>
+        <h3 style="text-align:center">BOT 2</h3>
         <p style="text-align:center">SHIPS BOARD</p>
         <table class="battleship-board">
             <tbody>
@@ -111,7 +122,7 @@
                         <th>@(i + 1)</th>
                         @for (int j = 0; j < 10; j++)
                         {
-                            if (Model.Board2.occupiedFields.Contains(new Battleships.Services.Coordinates(i, j)))
+                            if (Model.bot2.battleshipBoard.occupiedFields.Contains(new Battleships.Services.Coordinates(i, j)))
                             {
                                 <td class="battleship-field"></td>
                             }
@@ -136,13 +147,13 @@
                 </tr>
                 @for (int i = 0; i < 10; i++)
                 {
-                    <tr>
-                        <th>@(i + 1)</th>
-                        @for (int j = 0; j < 10; j++)
-                        {
-                            <td class="field"></td>
-                        }
-                    </tr>
+                <tr>
+                    <th>@(i + 1)</th>
+                    @for (int j = 0; j < 10; j++)
+                    {
+                        <td id=="@String.Format("{0}{1}", i,j)"></td>
+                    }
+                </tr>
                 }
             </tbody>
         </table>
