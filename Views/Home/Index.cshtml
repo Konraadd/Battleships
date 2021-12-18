@@ -41,6 +41,7 @@
 <div style="display:flex; margin-left:auto; margin-right:auto">
     <div style="display:flex; flex-direction:column; padding:4em">
         <p style="text-align:center">BOT 1</p>
+        <p style="text-align:center"> SHIPS BOARD</p>
         <table class="battleship-board">
             @{List<char> characters = new List<char>() { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
             }
@@ -70,9 +71,32 @@
                 }
             </tbody>
         </table>
+        <br />
+        <p style="text-align:center"> SHOOTING BOARD</p>
+        <table class="battleship-board">
+            <tbody>
+                <tr>
+                    @for (int i = 0; i <= 10; i++)
+                    {
+                        <th>@characters.ElementAt(i)</th>
+                    }
+                </tr>
+                @for (int i = 0; i < 10; i++)
+                {
+                    <tr>
+                        <th>@(i + 1)</th>
+                        @for (int j = 0; j < 10; j++)
+                        {
+                            <td class="field"></td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
     <div style="display:flex; flex-direction:column; padding:4em">
         <p style="text-align:center">BOT 2</p>
+        <p style="text-align:center">SHIPS BOARD</p>
         <table class="battleship-board">
             <tbody>
                 <tr>
@@ -95,6 +119,28 @@
                             {
                                 <td class="field"></td>
                             }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <p style="text-align:center"> SHOOTING BOARD</p>
+        <table class="battleship-board">
+            <tbody>
+                <tr>
+                    @for (int i = 0; i <= 10; i++)
+                    {
+                        <th>@characters.ElementAt(i)</th>
+                    }
+                </tr>
+                @for (int i = 0; i < 10; i++)
+                {
+                    <tr>
+                        <th>@(i + 1)</th>
+                        @for (int j = 0; j < 10; j++)
+                        {
+                            <td class="field"></td>
                         }
                     </tr>
                 }

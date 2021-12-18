@@ -14,13 +14,12 @@ namespace Battleships.Services
 
         public BattleshipBoard()
         {
-            battleships = new List<Battleship>();
             occupiedFields = new List<Coordinates>();
-            PlaceBattleships();
         }
 
-        private void PlaceBattleships()
+        public void PlaceBattleships()
         {
+            battleships = new List<Battleship>();
             placeBattleship(5);
             placeBattleship(4);
             placeBattleship(3);
@@ -61,21 +60,27 @@ namespace Battleships.Services
             }
         }
 
-        private Coordinates getSuitableRandomField(int shipSize, int orientation)
+        public Coordinates getSuitableRandomField(int shipSize, int orientation)
         {
             Random random = new Random();
-            int x, y;
-            if (orientation == 0)
+            Coordinates coordinates;
+            do
             {
-                x = random.Next(0, boardSize - shipSize);
-                y = random.Next(0, boardSize);
-            } 
-            else
-            {
-                x = random.Next(0, boardSize);
-                y = random.Next(0, boardSize - shipSize);
-            }
-            return new Coordinates(x, y);
+                int x, y;
+                if (orientation == 0)
+                {
+                    x = random.Next(0, boardSize - shipSize);
+                    y = random.Next(0, boardSize);
+                }
+                else
+                {
+                    x = random.Next(0, boardSize);
+                    y = random.Next(0, boardSize - shipSize);
+                }
+                coordinates = new Coordinates(x, y);
+            } while (occupiedFields.Contains(coordinates));
+
+            return coordinates;
         }
     }
 }

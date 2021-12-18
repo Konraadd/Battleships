@@ -17,8 +17,13 @@ namespace Battleships.Services
         public BattleshipGameManager()
         {
             Board1 = new BattleshipBoard();
-            //Bot1 = new BattleshipBot();
+            Board1.PlaceBattleships();
             Board2 = new BattleshipBoard();
+            Board2.PlaceBattleships();
+
+
+
+            //Bot1 = new BattleshipBot();
             //Board1 = new BattleshipBoard();
             //Board2 = new BattleshipBoard();
         }
