@@ -7,9 +7,9 @@ namespace Battleships.Services
 {
     public class BattleshipBot
     {
-        public BattleshipBoard battleshipBoard;
-        public BattleshipBoard enemyBattleshipBoard;
-        public ShootingBoard shootingBoard;
+        public BattleshipBoard battleshipBoard { get; set; }
+        public BattleshipBoard enemyBattleshipBoard { get; set; }
+        public ShootingBoard shootingBoard { get; set; }
 
         public BattleshipBot()
         {

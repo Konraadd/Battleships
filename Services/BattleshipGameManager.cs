@@ -7,16 +7,16 @@ namespace Battleships.Services
 {
     public class BattleshipGameManager
     {
-        public BattleshipBot bot1;
-        public BattleshipBot bot2;
+        public BattleshipBot bot1 { get; set; }
+        public BattleshipBot bot2 { get; set; }
 
-        public int gameRound;
-        private bool gameFinished = false;
+        public int gameRound { get; set; }
+        public bool gameFinished { get; set; } = false;
 
-        public BattleshipGameManager()
+        public BattleshipGameManager(BattleshipBot bot1, BattleshipBot bot2)
         {
-            bot1 = new BattleshipBot();
-            bot2 = new BattleshipBot();
+            this.bot1 = bot1;
+            this.bot2 = bot2;
             bot1.addEnemyBoard(bot2.battleshipBoard);
             bot2.addEnemyBoard(bot1.battleshipBoard);
         }

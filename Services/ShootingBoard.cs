@@ -9,9 +9,9 @@ namespace Battleships.Services
     {
         private int boardSize = 10;
 
-        public List<Coordinates> availableSpots;
-        public List<Coordinates> hits;
-        public List<Coordinates> misses;
+        public List<Coordinates> availableSpots { get; set; }
+        public List<Coordinates> hits { get; set; }
+        public List<Coordinates> misses { get; set; }
 
 
         public ShootingBoard()
