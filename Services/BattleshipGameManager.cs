@@ -11,7 +11,7 @@ namespace Battleships.Services
         public BattleshipBot bot2 { get; set; }
 
         public int gameRound { get; set; }
-        public bool gameFinished { get; set; } = false;
+        public bool gameOver { get; set; } = false;
 
         public BattleshipGameManager(BattleshipBot bot1, BattleshipBot bot2)
         {
@@ -21,19 +21,22 @@ namespace Battleships.Services
             bot2.addEnemyBoard(bot1.battleshipBoard);
         }
 
-        public void nextRound()
+        public GameRoundResult nextRound()
         {
+            PlayerRoundResult result1 = null;
+            PlayerRoundResult result2 = null;
             // if game isn't finished, proceed with making rounds
-            if (!gameFinished)
+            if (!gameOver)
             {
-                bot1.doRound();
-                bot2.doRound();
+                result1 = bot1.doRound();
+                result2 = bot2.doRound();
             }
             // check end of game conditions
             if (bot1.checkWon() || bot2.checkWon())
             {
-                gameFinished = true;
+                gameOver = true;
             }
+            return new GameRoundResult(result1, result2, gameOver);
         }
     }
 }

@@ -25,22 +25,27 @@ namespace Battleships.Controllers
 
         public IActionResult Index()
         {
+            // create new GameManager object and initialize the game
             BattleshipBot bot1 = new BattleshipBot();
             BattleshipBot bot2 = new BattleshipBot();
             BattleshipGameManager gameManager = new BattleshipGameManager(bot1, bot2);
-            var test = JsonSerializer.Serialize(gameManager);
+            // serialize and save gameManager object in session
             HttpContext.Session.SetString("GameManager", JsonSerializer.Serialize(gameManager));
             return View(gameManager);
         }
 
         public IActionResult NextRound()
         {
-            var value = HttpContext.Session.GetString("GameManager");
-            BattleshipGameManager gameManager = JsonSerializer.Deserialize<BattleshipGameManager>(value);
-            gameManager.nextRound();
+            // get saved gameManager object from session
+            var manager = HttpContext.Session.GetString("GameManager");
+            BattleshipGameManager gameManager = JsonSerializer.Deserialize<BattleshipGameManager>(manager);
+            // save result of next round
+            GameRoundResult result = gameManager.nextRound();
+            // serialize gameManager object and save in session
             string serializedManager = JsonSerializer.Serialize(gameManager);
             HttpContext.Session.SetString("GameManager", serializedManager);
-            return Ok(serializedManager);
+            // return round result
+            return Ok(JsonSerializer.Serialize(result));
         }
 
         public IActionResult Privacy()

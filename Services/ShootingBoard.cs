@@ -33,7 +33,7 @@ namespace Battleships.Services
         /// otherwise adds it to list of misses
         /// </summary>
         /// <returns></returns>
-        public void Shoot(BattleshipBoard battleshipBoard)
+        public PlayerRoundResult Shoot(BattleshipBoard battleshipBoard)
         {
             Random random = new Random();
             int index = random.Next(availableSpots.Count);
@@ -42,11 +42,13 @@ namespace Battleships.Services
             {
                 availableSpots.Remove(spot);
                 hits.Add(spot);
+                return new PlayerRoundResult(true, spot);
             } 
             else
             {
                 availableSpots.Remove(spot);
                 misses.Add(spot);
+                return new PlayerRoundResult(false, spot);
             }     
         }
     }

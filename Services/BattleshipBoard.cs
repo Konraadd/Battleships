@@ -9,8 +9,8 @@ namespace Battleships.Services
     {
         private int boardSize = 10;
 
-        public List<Battleship> battleships;
-        public List<Coordinates> occupiedFields;
+        public List<Battleship> battleships { get; set; }
+        public List<Coordinates> occupiedFields { get; set; }
 
         public BattleshipBoard()
         {

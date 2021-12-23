@@ -7,7 +7,7 @@ namespace Battleships.Services
 {
     public class Battleship
     {
-        List<Coordinates> fields { get; set; }
+        public  List<Coordinates> fields { get; set; }
 
         public Battleship(List<Coordinates> fields)
         {

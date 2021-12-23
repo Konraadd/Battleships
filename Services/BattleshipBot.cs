@@ -26,9 +26,9 @@ namespace Battleships.Services
         {
             enemyBattleshipBoard = enemyBoard;
         }
-        public void doRound()
+        public PlayerRoundResult doRound()
         {
-            shootingBoard.Shoot(enemyBattleshipBoard);
+            return shootingBoard.Shoot(enemyBattleshipBoard);
         }
 
         public bool checkWon()

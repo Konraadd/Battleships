@@ -4,27 +4,23 @@
 
 @model Battleships.Services.BattleshipGameManager
 
-<div class="text-center">
-    <h1 class="display-4">BATTLESHIPS</h1>
-</div>
-
 <style>
     .battleship-board {
         border-spacing: 0;
         border-collapse: collapse;
     }
 
-    .battleship-board th {
-        padding: .5em;
-    }
+        .battleship-board th {
+            padding: .5em;
+        }
 
-    .battleship-board td {
-        border: 3px solid;
-        width: 2em;
-        height: 2em;
-    }
+        .battleship-board td {
+            border: 3px solid;
+            width: 2em;
+            height: 2em;
+        }
 
-    .field{
+    .field {
         background: #eee;
     }
 
@@ -39,17 +35,43 @@
     .board-miss {
         background: #ff0000
     }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    .vertical-line {
-        border-left: 6px solid black;
+<script type="text/javascript">
+    function nextRound() {
+        $.get("@Url.Action("NextRound", "Home", null, Context.Request.Scheme)", function (data, status) {
+            changeGameState(data);
+        });
     }
 
+    function changeGameState(data) {
+        let gameRoundResult = JSON.parse(data);
+        let roundResult1 = gameRoundResult.playerRoundResult1;
+        let roundResult2 = gameRoundResult.playerRoundResult2;
+        changeShootingBoardField(1, roundResult1.isHit, roundResult1.coordinates.x, roundResult1.coordinates.y);
+        changeShootingBoardField(2, roundResult2.isHit, roundResult2.coordinates.x, roundResult2.coordinates.y);
+    }
 
-   
-</style>
+    function changeShootingBoardField(boardNumber, isHit, x, y) {
+        let element = document.getElementById("ShootingBoard" + boardNumber + "_" + x + "_" + y);
+        if (isHit) {
+            element.classList.add("board-hit");
+        }
+        else
+        {
+            element.classList.add("board-miss");
+        }
+    }
 
-<div style="display:flex; margin-left:auto; margin-right:auto">
-    <div style="display:flex; flex-direction:column; padding:4em">
+</script>
+
+
+<div class="text-center">
+    <h1 class="display-4">BATTLESHIPS</h1>
+</div>
+<div style="display:flex; justify-content:center">
+    <div style="display: flex; flex-direction: column; padding: 2em; margin: 2em; border: dashed green;">
         <h3 style="text-align:center">BOT 1</h3>
         <p style="text-align:center"> SHIPS BOARD</p>
         <table class="battleship-board">
@@ -93,19 +115,18 @@
                 </tr>
                 @for (int i = 0; i < 10; i++)
                 {
-            <tr>
-                <th>@(i + 1)</th>
-                @for (int j = 0; j < 10; j++)
-                {
-                    <td id= ="@String.Format("{0}{1}", i,j)"></td>
-                }
-            </tr>
+                    <tr>
+                        <th>@(i + 1)</th>
+                        @for (int j = 0; j < 10; j++)
+                        {
+                            <td id=@String.Format("ShootingBoard1_{0}_{1}", i,j)></td>
+                        }
+                    </tr>
                 }
             </tbody>
         </table>
     </div>
-    <div class="vertical-line"></div>
-    <div style="display:flex; flex-direction:column; padding:4em">
+    <div style="display:flex; flex-direction:column; padding:2em; margin: 2em; border: dashed red">
         <h3 style="text-align:center">BOT 2</h3>
         <p style="text-align:center">SHIPS BOARD</p>
         <table class="battleship-board">
@@ -147,15 +168,18 @@
                 </tr>
                 @for (int i = 0; i < 10; i++)
                 {
-                <tr>
-                    <th>@(i + 1)</th>
-                    @for (int j = 0; j < 10; j++)
-                    {
-                        <td id=="@String.Format("{0}{1}", i,j)"></td>
-                    }
-                </tr>
+                    <tr>
+                        <th>@(i + 1)</th>
+                        @for (int j = 0; j < 10; j++)
+                        {
+                            <td id=@String.Format("ShootingBoard2_{0}_{1}", i,j)></td>
+                        }
+                    </tr>
                 }
             </tbody>
         </table>
     </div>
+</div>
+<div style="display:flex; padding-top: 2em; justify-content:center">
+    <button onclick="nextRound()" style="width:200px; height:60">NEXT ROUND</button>
 </div>
