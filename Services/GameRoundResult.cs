@@ -7,15 +7,15 @@ namespace Battleships.Services
 {
     public class GameRoundResult
     {
-        public PlayerRoundResult playerRoundResult1 { get; set; }
-        public PlayerRoundResult playerRoundResult2 { get; set; }
-        public bool gameOver { get; set; }
+        public PlayerRoundResult PlayerRoundResult1 { get; set; }
+        public PlayerRoundResult PlayerRoundResult2 { get; set; }
+        public string WhoWon{ get; set; }
 
-        public GameRoundResult(PlayerRoundResult result1, PlayerRoundResult result2, bool gameOver)
+        public GameRoundResult(PlayerRoundResult result1, PlayerRoundResult result2, string whoWon)
         {
-            this.playerRoundResult1 = result1;
-            this.playerRoundResult2 = result2;
-            this.gameOver = gameOver;
+            this.PlayerRoundResult1 = result1;
+            this.PlayerRoundResult2 = result2;
+            this.WhoWon = whoWon;
         }
     }
 }

@@ -7,13 +7,13 @@ namespace Battleships.Services
 {
     public class PlayerRoundResult
     {
-        public bool isHit { get; set; }
-        public Coordinates coordinates { get; set; }
+        public bool IsHit { get; set; }
+        public Coordinates Coordinates { get; set; }
 
         public PlayerRoundResult(bool isHit, Coordinates coordinates)
         {
-            this.isHit = isHit;
-            this.coordinates = coordinates;
+            this.IsHit = isHit;
+            this.Coordinates = coordinates;
         }
     }
 }

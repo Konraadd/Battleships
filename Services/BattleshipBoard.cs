@@ -30,14 +30,14 @@ namespace Battleships.Services
                 {
                     for (int i = 0; i < size; i++)
                     {
-                        fields.Add(new Coordinates(coordinates.x + i, coordinates.y));
+                        fields.Add(new Coordinates(coordinates.X + i, coordinates.Y));
                     }
                 }
                 else
                 {
                     for (int i = 0; i < size; i++)
                     {
-                        fields.Add(new Coordinates(coordinates.x, coordinates.y + i));
+                        fields.Add(new Coordinates(coordinates.X, coordinates.Y + i));
                     }
                 }
 

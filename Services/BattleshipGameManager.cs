@@ -7,18 +7,17 @@ namespace Battleships.Services
 {
     public class BattleshipGameManager
     {
-        public BattleshipBot bot1 { get; set; }
-        public BattleshipBot bot2 { get; set; }
+        public BattleshipBot Bot1 { get; set; }
+        public BattleshipBot Bot2 { get; set; }
 
-        public int gameRound { get; set; }
-        public bool gameOver { get; set; } = false;
+        public string WhoWon { get; set; } = null;
 
         public BattleshipGameManager(BattleshipBot bot1, BattleshipBot bot2)
         {
-            this.bot1 = bot1;
-            this.bot2 = bot2;
-            bot1.addEnemyBoard(bot2.battleshipBoard);
-            bot2.addEnemyBoard(bot1.battleshipBoard);
+            this.Bot1 = bot1;
+            this.Bot2 = bot2;
+            Bot1.addEnemyBoard(bot2.battleshipBoard);
+            Bot2.addEnemyBoard(bot1.battleshipBoard);
         }
 
         public GameRoundResult nextRound()
@@ -26,17 +25,21 @@ namespace Battleships.Services
             PlayerRoundResult result1 = null;
             PlayerRoundResult result2 = null;
             // if game isn't finished, proceed with making rounds
-            if (!gameOver)
+            if (WhoWon == null)
             {
-                result1 = bot1.doRound();
-                result2 = bot2.doRound();
+                result1 = Bot1.doRound();
+                result2 = Bot2.doRound();
             }
             // check end of game conditions
-            if (bot1.checkWon() || bot2.checkWon())
+            if (Bot1.checkWon())
             {
-                gameOver = true;
+                WhoWon = "BOT1";
             }
-            return new GameRoundResult(result1, result2, gameOver);
+            if (Bot2.checkWon())
+            {
+                WhoWon = "BOT2";
+            }
+            return new GameRoundResult(result1, result2, WhoWon);
         }
     }
 }

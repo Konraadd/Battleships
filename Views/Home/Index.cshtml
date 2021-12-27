@@ -39,6 +39,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script type="text/javascript">
+
     function nextRound() {
         $.get("@Url.Action("NextRound", "Home", null, Context.Request.Scheme)", function (data, status) {
             changeGameState(data);
@@ -47,10 +48,15 @@
 
     function changeGameState(data) {
         let gameRoundResult = JSON.parse(data);
-        let roundResult1 = gameRoundResult.playerRoundResult1;
-        let roundResult2 = gameRoundResult.playerRoundResult2;
-        changeShootingBoardField(1, roundResult1.isHit, roundResult1.coordinates.x, roundResult1.coordinates.y);
-        changeShootingBoardField(2, roundResult2.isHit, roundResult2.coordinates.x, roundResult2.coordinates.y);
+        let roundResult1 = gameRoundResult.PlayerRoundResult1;
+        let roundResult2 = gameRoundResult.PlayerRoundResult2;
+        changeShootingBoardField(1, roundResult1.IsHit, roundResult1.Coordinates.X, roundResult1.Coordinates.Y);
+        changeShootingBoardField(2, roundResult2.IsHit, roundResult2.Coordinates.X, roundResult2.Coordinates.Y);
+
+        let whoWon = gameRoundResult.WhoWon;
+        if (whoWon != null) {
+            alert("Player " + whoWon + " won!");
+        }
     }
 
     function changeShootingBoardField(boardNumber, isHit, x, y) {
@@ -90,7 +96,7 @@
                         <th>@(i + 1)</th>
                         @for (int j = 0; j < 10; j++)
                         {
-                            if (Model.bot1.battleshipBoard.occupiedFields.Contains(new Battleships.Services.Coordinates(i, j)))
+                            if (Model.Bot1.battleshipBoard.occupiedFields.Contains(new Battleships.Services.Coordinates(i, j)))
                             {
                                 <td class="battleship-field"></td>
                             }
@@ -143,7 +149,7 @@
                         <th>@(i + 1)</th>
                         @for (int j = 0; j < 10; j++)
                         {
-                            if (Model.bot2.battleshipBoard.occupiedFields.Contains(new Battleships.Services.Coordinates(i, j)))
+                            if (Model.Bot2.battleshipBoard.occupiedFields.Contains(new Battleships.Services.Coordinates(i, j)))
                             {
                                 <td class="battleship-field"></td>
                             }
