@@ -8,5 +8,5 @@ The website creates 2 bots with boards and automatically places ships on the boa
 ### Start of the game
 ![image](https://user-images.githubusercontent.com/26314618/147504739-278549b5-3c7e-4953-99b0-790270994f4e.png)
 
-### End of game
+### End of the game
 ![image](https://user-images.githubusercontent.com/26314618/147505262-469e84c3-7473-480a-8cc4-4cfc7a0447f1.png)
